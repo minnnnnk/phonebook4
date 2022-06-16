@@ -31,12 +31,22 @@
 		]]>
 	</update>
 
-	<delete id="personDelete" parameterType="com.javaex.vo.PersonVo">
+	<delete id="personDelete" parameterType="int">
 		<![CDATA[
-		
-			delete frm person
+			delete from person
 			where person_id = #{personId}
-		
 		]]>
 	</delete>
+	
+	<select id="getPerson" resultType="com.javaex.vo.PersonVo" parameterType="int">
+		<![CDATA[
+			select  person_id personId
+					,name
+					,hp
+					,company
+			from person
+			where person_id = #{personId}
+		]]>
+	</select>
+	
 </mapper>

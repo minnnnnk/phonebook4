@@ -93,12 +93,12 @@ public class PhoneController {
 	}
 	// 삭제메소드
 	@RequestMapping(value="delete",method= {RequestMethod.GET,RequestMethod.POST})
-	public String delete(@RequestParam("personId") int id) {
+	public String delete(@RequestParam("personId") int personId) {
 		System.out.println("PhoneController>delete");
 		//PhoneDao pDao = new PhoneDao();
 		
-		System.out.println(id);
-		PhoneService.personDelete(id);
+		System.out.println(personId);
+		PhoneService.personDelete(personId);
 		
 		
 		return "redirect:/list";

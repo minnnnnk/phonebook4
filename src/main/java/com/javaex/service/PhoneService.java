@@ -23,6 +23,7 @@ public class PhoneService {
 	//전화번호 리스트
 	public List<PersonVo> getPersonList(){
 		System.out.println("getPersonList");
+		
 		List<PersonVo> personList = phoneDao.getPersonList();
 		
 		return personList;
@@ -49,9 +50,9 @@ public class PhoneService {
 		
 		return count;
 	}
-	public int personDelete(int id) {
+	public int personDelete(int personId) {
 		System.out.println("personDelete");
-		int count = phoneDao.personDelete(id);
+		int count = phoneDao.personDelete(personId);
 		
 		return count;
 	}
