@@ -2,9 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="phonebook">
 
-	<select id="selectList" resultType="com.javaex.vo.PersonVo">
+	<resultMap id="resultMapPersonVo" type= "PersonVo">
+		<result column="person_id" property= "personId" />
+		<result column="name " property="name" />
+		<result column="hp " property="hp" />
+		<result column="company " property="company" />
+	</resultMap>
+	
+	<!-- resultMap을 쓸때에는 이렇게 쓰기 -->
+	
+	<select id="selectList" resultMap="resultMapPersonVo">
 		<![CDATA[
-			select 	person_id personId
+			select 	person_id 
 					,name
 					,hp
 					,company
@@ -13,7 +22,7 @@
 		]]>
 	</select>
 
-	<insert id="personInsert" parameterType="com.javaex.vo.PersonVo">
+	<insert id="personInsert" parameterType="PersonVo">
 		<![CDATA[
 			insert into person
 			values(seq_person_id.nextval, #{name}, #{hp}, #{company})
@@ -21,7 +30,18 @@
 
 	</insert>
 	
-	<update id="personUpdate" parameterType="com.javaex.vo.PersonVo">
+	
+	<!-- //전화번호 등록(map을 사용하는 가상의 상황:문법설명) -->
+	<!-- CDATA안씀 parameterType은 map으로 해야함 -->
+	<insert id="personInsert2" parameterType="map">
+		<![CDATA[
+			insert into person
+			values(seq_person_id.nextval, #{name}, #{hp}, #{company})
+			]]>
+	</insert>
+	
+
+	<update id="personUpdate" parameterType="PersonVo">
 		<![CDATA[
 			update person
 			set name = #{name}
@@ -37,8 +57,19 @@
 			where person_id = #{personId}
 		]]>
 	</delete>
+
+	<select id="getPerson" resultMap="resultMapPersonVo" parameterType="int">
+		<![CDATA[
+			select  person_id
+					,name
+					,hp
+					,company
+			from person
+			where person_id = #{personId}
+		]]>
+	</select>
 	
-	<select id="getPerson" resultType="com.javaex.vo.PersonVo" parameterType="int">
+	<select id="getPerson2" resultType="map" parameterType="int">
 		<![CDATA[
 			select  person_id personId
 					,name
@@ -48,5 +79,5 @@
 			where person_id = #{personId}
 		]]>
 	</select>
-	
+
 </mapper>

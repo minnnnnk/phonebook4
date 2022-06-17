@@ -25,7 +25,10 @@
 				<td>${pList.company }</td>
 			<tr>
 			<tr>
-				<td><a href="/phonebook4/updateForm?personId=${pList.personId}">[수정폼]</a></td>
+				<td>
+				<a href="/phonebook4/updateForm?personId=${pList.personId}">[수정폼]</a>
+				<a href="/phonebook4/updateForm2?no=${pList.personId}">[수정폼2]</a>
+				</td>
 				<td><a href="/phonebook4/delete?personId=${pList.personId}">삭제</a></td>
 			<tr>
 		</table>

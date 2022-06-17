@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class PhoneController {
 	// 생성자
 
 	// 메소드 gs
-
+	
 	// 메소드 일반
 
 	@RequestMapping(value="list", method = {RequestMethod.GET,RequestMethod.POST})
@@ -53,7 +54,7 @@ public class PhoneController {
 		// 다오로 저장 -> service가 다해줌
 		//PhoneDao phoneDao = new PhoneDao();
 		PhoneService.personInsert(personVo);
-		
+		//PhoneService.personInsert2(); <-- map으로 할수있다
 		return "redirect:/list";
 	}
 
@@ -77,6 +78,18 @@ public class PhoneController {
 		model.addAttribute("pVo",pVo);
 		
 		return "updateForm";
+	}
+	@RequestMapping(value="updateForm2",method = {RequestMethod.GET,RequestMethod.POST})
+	public String modifyForm2(Model model,@RequestParam("no") int no) {
+		System.out.println("PhoneController>updateForm");
+		
+		Map<String, Object> pMap = PhoneService.getPerson2(no);
+		
+		System.out.println(pMap);
+		
+		model.addAttribute("pMap", pMap);
+		
+		return "updateForm2";
 	}
 	// 수정 메소드
 	@RequestMapping(value="update",method= {RequestMethod.GET,RequestMethod.POST})
